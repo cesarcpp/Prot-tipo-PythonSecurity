@@ -9,11 +9,32 @@ from phonenumbers import geocoder
 
 
 def verificar_ip():
-    print('-' * 60)
-    ip_host = input("Digite o IP ou Host a ser verificado: ")
-    time.sleep(2)
-    os.system(f' ping -n 4 {ip_host} ')
-    print('-' * 60)
+    def ip():
+        ip_host = vip.get()
+        os.system(f" ping -n 4 {ip_host}")
+        time.sleep(10)
+
+    janela_5 = Tk()
+    janela_5.title("Verificador de IP")
+    janela_5.geometry("355x120")
+    janela_5.configure(background="#F0F8FF")
+    janela_5.maxsize(355, 120)
+    janela_5.minsize(355, 120)
+
+    Label(janela_5, text="Digite o IP ou Host a ser verificado:", anchor=W, background="#00BFFF",
+          font="-weight bold -size 9").place(x=10, y=10, width=200, height=20)
+
+    vip = Entry(janela_5, background="#C0C0C0")
+    vip.place(x=10, y=40, width=150, height=20)
+
+    Label(janela_5, text="EX: 192.168.15.1", anchor=W, background="#F0F8FF",
+          font="-weight bold -size 7").place(x=170, y=41)
+
+    Button(janela_5, text="Verificar", command=ip).place(x=10, y=65)
+
+    Label(janela_5, text="OBS: Será aberto o Prompt de Comando rodando a verificação", background="#F0F8FF",
+          font="-weight bold -size 8").place(x=5, y=95)
+    janela_5.mainloop()
 
 
 # Função e Segunda Interface Gráfica
@@ -64,8 +85,9 @@ def verifica_telefone():
           font="-weight bold -size 9").place(x=10, y=10, width=210, height=30)
 
     vtel = Entry(janela_3, background="#C0C0C0")
-    vtel.insert(0, "Ex: +551140088922")
     vtel.place(x=10, y=40, width=110, height=20)
+
+    Label(janela_3, text="Ex: +551140088922", background="#F0F8FF").place(x=120, y=40, height=20)
 
     Button(janela_3, text="Verificar", command=verificar).place(x=10, y=70, width=50, height=20)
 
@@ -133,7 +155,7 @@ def gerador_hashes():
     sha512 = Button(janela_4, text="SHA512", command=hash_sha512)
     sha512.place(x=90, y=50, width=50, height=20)
 
-    Label(janela_4, text="OBS: Será criado um arquivo .txt com os códigos das Hashes no mesmo que diretório \n que se "
+    Label(janela_4, text="OBS: Será criado um arquivo .txt com os códigos das Hashes no mesmo diretório \n que se "
                          "encontra o programa", anchor=W, font="-weight bold -size 9").place(x=5, y=150)
 
     janela_4.mainloop()
@@ -154,7 +176,7 @@ texto_apresentacao.grid(column=0, row=0, padx=10, pady=5)
 texto_orientacao = Label(janela, text="Escolha uma das opções abaixo:", font=" -size 7")
 texto_orientacao.grid(column=0, row=1, padx=10, pady=5)
 
-ip = Button(janela, text="Verificar IP", command=verificar_ip, background="#FFD700")
+ip = Button(janela, text="Verificar IP (CMD)", command=verificar_ip, background="#FFD700")
 ip.grid(column=0, row=2, padx=10, pady=5)
 
 senha = Button(janela, text="Gerar Senha", command=gerar_senha, background="#FFD700")
